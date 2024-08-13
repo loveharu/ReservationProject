@@ -1,0 +1,21 @@
+INDEX VERSION 1.131+C:\mySTS\ProjectBackup\.metadata\.plugins\org.eclipse.jdt.core
+3854799351.index
+1408000906.index
+2464002796.index
+3270406702.index
+1305032897.index
+848733482.index
+2621338532.index
+1555575959.index
+506702213.index
+2828509259.index
+558057138.index
+1163280548.index
+2817364054.index
+3157818033.index
+4273287371.index
+1727987383.index
+116227582.index
+491425682.index
+360435346.index
+846799617.index

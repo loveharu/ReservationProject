@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;serviceItemsMapper.xml&apos; to &apos;serviceItemsMapper.xml&apos;&#x0D;&#x0A;- Original project: &apos;spr0806_reservation&apos;&#x0D;&#x0A;- Destination element: &apos;serviceItemsMapper.xml&apos;&#x0D;&#x0A;- Original element: &apos;serviceItemsMapper.xml&apos;" description="Copy file" element1="src/main/resources/mappers/serviceItemsMapper.xml" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1723532015641" target="/spr0806_reservation/src/main/resources/mappers/serviceItemsMapper.xml" units="0" version="1.0"/>
+</session>
