@@ -1,0 +1,110 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 생략된 부분은 이전 코드와 동일 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8bd05cab0ecdd331c399721ff5339d96&libraries=services"></script>
+<script>
+	$(document)
+			.ready(
+					function() {
+						// 이전에 작성한 jQuery 코드
+
+						// 길찾기 버튼 클릭 이벤트 처리
+						function searchRoute(destination) {
+							// 카카오맵의 길찾기 객체를 사용하여 경로를 탐색
+							var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+							mapOption = {
+								center : new kakao.maps.LatLng(37.5665,
+										126.9780), // 지도의 중심좌표 (서울)
+								level : 3
+							// 지도의 확대 레벨
+							};
+							var map = new kakao.maps.Map(mapContainer,
+									mapOption); // 지도를 생성합니다
+
+							var directions = new kakao.maps.services.Directions();
+							directions
+									.route(
+											{
+												origin : new kakao.maps.LatLng(
+														37.5665, 126.9780), // 출발지 좌표 (예: 서울)
+												destination : new kakao.maps.LatLng(
+														destination.lat,
+														destination.lng), // 도착지 좌표
+												waypoints : [], // 경유지
+												priority : kakao.maps.services.DirectionsPriority.PRIORITY_DISTANCE
+											// 우선순위
+											},
+											function(result, status) {
+												if (status === kakao.maps.services.Status.OK) {
+													console.log(result);
+													// 경로 결과를 지도에 표시하거나 HTML로 표현
+													displayRoute(result);
+												} else {
+													alert('경로를 찾을 수 없습니다.');
+												}
+											});
+
+							function displayRoute(result) {
+								// 경로를 지도에 표시하거나 필요한 정보를 화면에 출력
+								var path = result.routes[0].sections[0].roads[0].path;
+								var polyline = new kakao.maps.Polyline({
+									path : path,
+									strokeWeight : 5,
+									strokeColor : '#FF0000',
+									strokeOpacity : 0.8,
+									strokeStyle : 'solid'
+								});
+								polyline.setMap(map); // 지도에 경로를 표시합니다
+							}
+						}
+
+						// 길찾기 버튼 이벤트 설정 (예: 특정 장소 클릭 시)
+						$(".route-button").click(function() {
+							var destination = {
+								lat : 37.4979,
+								lng : 127.0276
+							}; // 목적지 좌표 (예: 강남역)
+							searchRoute(destination);
+						});
+
+						// 페이지 로드 시 지도 로드
+						var container = document.getElementById('map');
+						var options = {
+							center : new kakao.maps.LatLng(37.5665, 126.9780), // 초기 지도 중심 좌표
+							level : 3
+						};
+						var map = new kakao.maps.Map(container, options);
+					});
+</script>
+</head>
+
+<body>
+	<header>
+		<!-- 생략된 부분은 이전 코드와 동일 -->
+	</header>
+
+	<div class="content-container">
+		<!-- 생략된 부분은 이전 코드와 동일 -->
+		<nav>
+			<!-- 생략된 부분은 이전 코드와 동일 -->
+		</nav>
+		<section>
+			<h2>공지사항</h2>
+			<!-- 공지사항이 AJAX로 로드됩니다. -->
+			<button class="route-button">길찾기</button>
+			<!-- 길찾기 버튼 -->
+			<div id="map" style="width: 100%; height: 350px;"></div>
+			<!-- 카카오맵 표시 영역 -->
+		</section>
+		<aside>
+			<h3>사용자 정보</h3>
+			<!-- 사용자 정보가 AJAX로 로드됩니다. -->
+		</aside>
+	</div>
+</body>
+</html>

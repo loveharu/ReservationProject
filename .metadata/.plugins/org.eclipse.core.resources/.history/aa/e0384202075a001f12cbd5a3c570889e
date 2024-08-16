@@ -1,0 +1,108 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>카카오맵 서비스</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c441b3b3b2ef1a8131497b58ac1bae64&libraries=services,clusterer,drawing"></script>
+<script>
+	$(document)
+			.ready(
+					function() {
+						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+						mapOption = {
+							center : new kakao.maps.LatLng(37.5665, 126.9780), // 지도의 중심좌표
+							level : 3
+						// 지도의 확대 레벨
+						};
+
+						// 지도를 생성합니다    
+						var map = new kakao.maps.Map(mapContainer, mapOption);
+
+						// 길찾기 예제
+						function searchRoute() {
+							var directions = new kakao.maps.services.Directions();
+							directions
+									.route(
+											{
+												origin : new kakao.maps.LatLng(
+														37.5665, 126.9780), // 출발지 좌표
+												destination : new kakao.maps.LatLng(
+														37.4979, 127.0276), // 도착지 좌표
+												priority : kakao.maps.services.DirectionsPriority.PRIORITY_DISTANCE
+											// 우선순위
+											},
+											function(result, status) {
+												if (status === kakao.maps.services.Status.OK) {
+													var path = result.routes[0].sections[0].roads[0].path;
+													var polyline = new kakao.maps.Polyline(
+															{
+																path : path,
+																strokeWeight : 5,
+																strokeColor : '#FF0000',
+																strokeOpacity : 0.8,
+																strokeStyle : 'solid'
+															});
+													polyline.setMap(map); // 지도에 경로를 표시합니다
+												} else {
+													alert('경로를 찾을 수 없습니다.');
+												}
+											});
+						}
+
+						// 현재 위치 표시 예제
+						function showCurrentLocation() {
+							if (navigator.geolocation) {
+								navigator.geolocation
+										.getCurrentPosition(function(position) {
+											var lat = position.coords.latitude, // 위도
+											lon = position.coords.longitude; // 경도
+
+											var locPosition = new kakao.maps.LatLng(
+													lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+											message = '<div style="padding:5px;">현재 위치입니다.</div>'; // 인포윈도우에 표시될 내용입니다
+
+											displayMarker(locPosition, message);
+										});
+							} else {
+								alert('GPS를 지원하지 않습니다.');
+							}
+						}
+
+						// 마커와 인포윈도우를 표시하는 함수
+						function displayMarker(locPosition, message) {
+							var marker = new kakao.maps.Marker({
+								map : map,
+								position : locPosition
+							});
+
+							var iwContent = message, iwRemoveable = true;
+
+							var infowindow = new kakao.maps.InfoWindow({
+								content : iwContent,
+								removable : iwRemoveable
+							});
+
+							infowindow.open(map, marker);
+							map.setCenter(locPosition);
+						}
+
+						// 지도 서비스에 필요한 기능 호출
+						showCurrentLocation();
+						$("#searchRouteButton").click(searchRoute);
+					});
+</script>
+</head>
+<body>
+	<header>
+		<h1>카카오맵 서비스</h1>
+	</header>
+	<div id="map" style="width: 100%; height: 400px;"></div>
+	<button id="searchRouteButton">길찾기</button>
+	<!-- 길찾기 버튼 -->
+</body>
+</html>

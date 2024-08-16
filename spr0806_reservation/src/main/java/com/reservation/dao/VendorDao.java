@@ -2,6 +2,8 @@ package com.reservation.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.reservation.dto.VendorDto;
 
 public interface VendorDao {
@@ -17,5 +19,5 @@ public interface VendorDao {
 	public void delete(String email) throws Exception;
 
 	public VendorDto selectBusiness_regi_num(String business_regi_num) throws Exception;
-
+	
 }

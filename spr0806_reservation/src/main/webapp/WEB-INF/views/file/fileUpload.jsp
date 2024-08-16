@@ -8,36 +8,49 @@
 </head>
 <body>
 	<div class="container">
-		<h1>서비스 업체 등록</h1>
-		<form action="/ex/file/UploadDB" method="post" enctype="multipart/form-data">
+		<h1>서비스 항목 등록</h1>
+		<form action="/ex/file/updateDB" method="post"
+			enctype="multipart/form-data">
+
 			<div class="form-group">
-				<label for="companyName">업체명:</label> <input type="text"
-					name="companyName" id="companyName" required>
+				<label for="item_id">아이템 ID:</label> <input type="text"
+					name="item_id" id="item_id" required>
 			</div>
 
 			<div class="form-group">
-				<label for="category">카테고리:</label> <select name="category"
-					id="category" required>
-					<option value="호텔">호텔</option>
-					<option value="레스토랑">레스토랑</option>
-					<option value="투어">투어</option>
-					<option value="교통">교통</option>
-				</select>
+				<label for="email">이메일:</label> <input type="email" name="email"
+					id="email" required>
 			</div>
 
 			<div class="form-group">
-				<label for="description">업체 설명:</label>
-				<textarea name="description" id="description" rows="4" required></textarea>
+				<label for="business_regi_num">사업자 등록 번호:</label> <input type="text"
+					name="business_regi_num" id="business_regi_num" required>
 			</div>
 
 			<div class="form-group">
-				<label for="contact">연락처:</label> <input type="text" name="contact"
-					id="contact" required>
+				<label for="service_name">서비스명:</label> <input type="text"
+					name="service_name" id="service_name" required>
 			</div>
 
 			<div class="form-group">
-				<label for="location">위치:</label> <input type="text" name="location"
-					id="location" required>
+				<label for="service_description">서비스 설명:</label>
+				<textarea name="service_description" id="service_description"
+					rows="4" required></textarea>
+			</div>
+
+			<div class="form-group">
+				<label for="required_time">소요 시간 (분):</label> <input type="number"
+					name="required_time" id="required_time" required>
+			</div>
+
+			<div class="form-group">
+				<label for="price">가격 (원):</label> <input type="number" name="price"
+					id="price" required>
+			</div>
+
+			<div class="form-group">
+				<label for="item_status">아이템 상태:</label> <input type="text"
+					name="item_status" id="item_status" required>
 			</div>
 
 			<div class="form-group">

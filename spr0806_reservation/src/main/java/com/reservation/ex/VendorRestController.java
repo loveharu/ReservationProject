@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.reservation.dto.BusinessPlaceInfoDto;
+import com.reservation.dto.BusnisessPlaceInfoDto;
 import com.reservation.dto.VendorDto;
-import com.reservation.service.BusinessPlaceInfoService;
+import com.reservation.service.BusnisessPlaceInfoService;
 import com.reservation.service.VendorService;
 
 @RestController
@@ -22,20 +22,20 @@ public class VendorRestController {
 	private VendorService vendorService;
 	
 	@Autowired
-	private BusinessPlaceInfoService businessPlaceInfo;
+	private BusnisessPlaceInfoService businessPlaceInfo;
 	
 	
 
-	@RequestMapping("/vendorrest/test")
-	public BusinessPlaceInfoDto selectVendorBusinessPlaceInfo(String email, String business_regi_num) throws Exception {
+	@RequestMapping("/vendorrest/test")// 테스트용 실제구현 x 
+	public String selectVendorBusinessPlaceInfo(String email, String business_regi_num) throws Exception {
 		System.out.println("VendorRestController - /vendorrest/test");
 		//BusinessPlaceInfoDto dto = businessPlaceInfo.selectTest("test1", "test2");
 		//BusinessPlaceInfoDto dto = businessPlaceInfo.selectTest("vendor", "gsgs252511");
 		email = "vendor";
 		business_regi_num = "gsgs252511";
-		BusinessPlaceInfoDto dto = businessPlaceInfo.selectVendorBusinessPlaceInfo(email, business_regi_num);
+//		BusinessPlaceInfoDto dto = businessPlaceInfo.selectVendorBusinessPlaceInfo(email, business_regi_num);
 		
-		return dto;
+		return null;
 	}
 	
 	
